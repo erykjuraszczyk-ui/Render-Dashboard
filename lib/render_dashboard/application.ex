@@ -7,6 +7,8 @@ defmodule RenderDashboard.Application do
 
   @impl true
   def start(_type, _args) do
+  OpentelemetryPhoenix.setup()
+  
     children = [
       RenderDashboardWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:render_dashboard, :dns_cluster_query) || :ignore},
