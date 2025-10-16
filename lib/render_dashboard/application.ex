@@ -7,6 +7,11 @@ defmodule RenderDashboard.Application do
 
   @impl true
   def start(_type, _args) do
+  # === OpenTelemetry setup (traces do Grafana Cloud) ===
+  :ok = OpentelemetryExporter.setup()
+  :ok = OpentelemetryPhoenix.setup()
+  
+  # włącza instrumentację Phoenix (Plug, Router, LiveView itp.)
   OpentelemetryPhoenix.setup()
   
     children = [
